@@ -15,7 +15,6 @@ public class Transaction
     public decimal Amount { get; set; }
 
     public long CategoryId { get; set; }
-    public Category Category { get; set; } = null!;
 
     public string UserId { get; set; } = string.Empty;
 }
