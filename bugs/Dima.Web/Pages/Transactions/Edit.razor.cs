@@ -42,6 +42,24 @@ public partial class EditTransactionPage : ComponentBase
     {
         IsBusy = true;
 
+        try
+        {
+            var request = new GetAllCategoriesRequest();
+            var result = await CategoryHandler.GetAllAsync(request);
+            if (result.IsSuccess)
+            {
+                Categories = result.Data ?? [];
+                InputModel.CategoryId = Categories.FirstOrDefault()?.Id ?? 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
         await GetTransactionByIdAsync();
         await GetCategoriesAsync();
 
