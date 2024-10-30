@@ -10,6 +10,10 @@ builder.AddDataContexts();
 builder.AddCrossOrigin();
 builder.AddDocumentation();
 builder.AddServices();
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -21,3 +25,9 @@ app.UseSecurity();
 app.MapEndpoints();
 
 app.Run();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
